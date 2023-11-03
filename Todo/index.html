@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="styles.css" rel="stylesheet" />
+		<title>ToDo List</title>
+	</head>
+	<body>
+		<header><h1>Todo List</h1></header>
+
+		<main>
+			<!-- Navigation bar -->
+			<nav>
+				<ul>
+					<li>All</li>
+					<li>Active</li>
+					<li>Done</li>
+				</ul>
+			</nav>
+
+			<!-- Input -->
+			<form>
+				<input class="input" type="text" placeholder="Todo" />
+				<button class="add" type="submit">Add</button>
+			</form>
+
+			<!-- values rendered here-->
+			<ul class="list"></ul>
+			<button class="clear">Clear All</button>
+		</main>
+
+		<script type="module" src="index.js"></script>
+	</body>
+</html>
