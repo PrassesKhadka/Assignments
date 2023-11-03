@@ -25,6 +25,12 @@ h1 {
 	color: #00b4d8;
 }
 
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	min-height: 50vh;
+}
 nav {
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -36,10 +42,16 @@ nav ul {
 }
 
 nav ul li {
-	padding: 5px;
+	padding: 12px;
 	color: black;
-}
+	font-weight: 800;
 
+	cursor: pointer;
+}
+nav ul li:hover {
+	color: white;
+	background-color: slategray;
+}
 form {
 	display: flex;
 	flex-direction: column;
@@ -78,8 +90,9 @@ input {
 	margin: 5px;
 }
 .clear {
-	padding: 5px;
-	width: 100%;
+	text-align: center;
+	width: 25%;
+	padding: 8px;
 	background-color: red;
 	color: white;
 }

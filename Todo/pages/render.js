@@ -1,3 +1,5 @@
+// The main page-All todos rendered
+
 import { todolist } from "../index.js";
 
 function render() {
