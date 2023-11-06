@@ -11,7 +11,13 @@ function render() {
 		const li = document.createElement("li");
 		const h2 = document.createElement("h2");
 		li.className = "list-item";
+
 		h2.textContent = element.title;
+		if (!element.active) {
+			h2.className = "strike";
+		} else {
+			h2.className = "";
+		}
 		li.appendChild(h2);
 
 		const removeButton = document.createElement("button");
