@@ -10,13 +10,14 @@
 .container {
 	width: 100vw;
 	height: 100vh;
+	padding: 15px;
 	overflow: hidden;
 	/* border: 5px solid blue; */
 	background-color: whitesmoke;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-evenly;
 }
 
 h1 {
@@ -25,7 +26,9 @@ h1 {
 	font-family: monospace;
 	text-align: center;
 	letter-spacing: -2px;
-	margin-top: 5px;
+	border-left: 5px solid red;
+	border-right: 5px solid red;
+	padding: 0px 5px;
 }
 .box {
 	position: relative;
@@ -34,6 +37,7 @@ h1 {
 	margin: 5%;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 	/* border: 5px solid red; */
 }
 
@@ -44,10 +48,14 @@ h1 {
 	min-height: 400px;
 	min-width: 300px;
 	position: relative;
-	border-top: 5px solid green;
+	border-top: 5px solid blue;
 	border-bottom: 5px solid green;
 	box-shadow: 1px;
-	overflow: hidden;
+	overflow-block: blur(1.2px);
+	z-index: 20;
+	/* overflow: hidden; */
+	/* scroll-snap-type: x mandatory; */
+	/* scroll-padding: 0 24px; */
 }
 
 .item {
@@ -57,8 +65,20 @@ h1 {
 	height: 100%;
 	width: 100%;
 	padding: 8px 0;
-	cursor: grab;
+	cursor: pointer;
 	transition: 1s;
+	/* scroll-snap-align: start; */
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		border: 5px solid yellow;
+		/* backdrop-filter: blur(5px); */
+		z-index: 10;
+	}
 }
 
 .image {
@@ -66,6 +86,9 @@ h1 {
 	border: 1px solid black;
 	height: 100%;
 	width: 100%;
+	&:hover {
+		background-color: rgba(1, 1, 1, 0.4);
+	}
 }
 
 #prev,
