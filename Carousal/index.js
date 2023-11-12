@@ -7,7 +7,6 @@ const next = document.querySelector("#next");
 let items = "list of items";
 let index = 0;
 const median = Math.ceil(data.length / 2);
-let pause = false;
 
 function initialrender() {
 	data.forEach((element, i) => {
@@ -59,13 +58,13 @@ document.addEventListener("keydown", (e) => {
 	}
 });
 
-// slider.addEventListener("click", () => {
-// 	pause = !pause;
-// 	pause ? clearInterval(myInterval) : null;
-// });
+slider.addEventListener("click", () => {
+	pause = !pause;
+	pause ? clearInterval(myInterval) : null;
+});
 
-// const myInterval = setInterval(() => {
-// 	nextClick();
-// }, 2000);
+const myInterval = setInterval(() => {
+	nextClick();
+}, 1000);
 
 initialrender();

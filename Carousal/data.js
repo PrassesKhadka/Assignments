@@ -12,6 +12,8 @@ const data = [
 	{ id: Date.now(), image: "./images/image-8.jpeg" },
 	{ id: Date.now(), image: "./images/image-10.jpeg" },
 	{ id: Date.now(), image: "./images/image-13.jpeg" },
+	{ id: Date.now(), image: "./images/image-14.jpeg" },
+	{ id: Date.now(), image: "./images/image-15.jpeg" },
 ];
 
 export default data;

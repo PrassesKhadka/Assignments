@@ -1,9 +1,6 @@
-import Time from "./time.js";
-
 function Timer(value) {
 	// datas:
 
-	let play = false;
 	const timer = document.querySelector("#timer");
 	let myInterval;
 
@@ -21,8 +18,19 @@ function Timer(value) {
 		}
 	}
 
+	function isSingleDigit(number) {
+		return number >= 0 && number <= 9 ? true : false;
+	}
+
 	function mount() {
-		timer.textContent = `${value.min}:${value.sec}`;
+		timer.textContent =
+			isSingleDigit(value.min) && isSingleDigit(value.sec)
+				? `0${value.min}: 0${value.sec}`
+				: isSingleDigit(value.min)
+				? `0${value.min}: ${value.sec}`
+				: isSingleDigit(value.sec)
+				? `${value.min}: 0${value.sec}`
+				: `${value.min}: ${value.sec}`;
 	}
 
 	myInterval = setInterval(() => {
@@ -38,8 +46,6 @@ function Timer(value) {
 	// 		clearInterval(myInterval);
 	// 	}
 	// }
-
-	return { mount };
 }
 
 export default Timer;
