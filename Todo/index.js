@@ -1,7 +1,5 @@
 import Todo from "./factories/todo.js";
 import ToDoList from "./factories/todoList.js";
-import activeRender from "./pages/active-render.js";
-import doneRender from "./pages/done-render.js";
 import render from "./pages/render.js";
 
 const add = document.querySelector(".add");
@@ -12,6 +10,7 @@ const active = document.querySelector(".active");
 const done = document.querySelector(".done");
 
 export const todolist = ToDoList();
+export let click = "all";
 
 add.addEventListener("click", (e) => {
 	e.preventDefault();
@@ -30,15 +29,18 @@ clear.addEventListener("click", () => {
 });
 
 all.addEventListener("click", () => {
+	click = "all";
 	render();
 });
 
 active.addEventListener("click", () => {
-	activeRender();
+	click = "active";
+	render();
 });
 
 done.addEventListener("click", () => {
-	doneRender();
+	click = "done";
+	render();
 });
 
 render();

@@ -1,13 +1,21 @@
 // The main page-All todos rendered
 
 import { todolist } from "../index.js";
+import { click } from "../index.js";
 
 function render() {
 	const data = JSON.parse(localStorage.getItem("todo"));
-
 	const list = document.querySelector(".list");
+	let dataCopy = data;
 	list.innerHTML = "";
-	data.forEach((element) => {
+
+	click === "active"
+		? (dataCopy = data.filter((value) => value.active))
+		: click === "done"
+		? (dataCopy = data.filter((value) => !value.active))
+		: dataCopy;
+
+	dataCopy.forEach((element) => {
 		const li = document.createElement("li");
 		const h2 = document.createElement("h2");
 		li.className = "list-item";
@@ -22,6 +30,7 @@ function render() {
 
 		const removeButton = document.createElement("button");
 		removeButton.textContent = "🗑️";
+		removeButton.style.cursor = "pointer";
 		removeButton.className = "remove";
 		removeButton.addEventListener("click", () => {
 			todolist.removeFromLocalStorage(element.id);
@@ -34,6 +43,7 @@ function render() {
 			render();
 		});
 		completeButton.textContent = element.active ? "❌" : "✅";
+		completeButton.style.cursor = "pointer";
 
 		const div = document.createElement("div");
 		div.append(removeButton, completeButton);
