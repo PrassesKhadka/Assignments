@@ -1,0 +1,108 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+}
+body {
+	font-size: 62.5%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+button {
+	cursor: pointer;
+	display: inline-block;
+}
+li {
+	list-style-type: none;
+}
+
+.bg-screen {
+	height: 100vh;
+	width: 100vw;
+	background-image: url("./assets/sunset.png");
+	background-repeat: none;
+	background-position: fixed;
+	background-attachment: fixed;
+	background-position-x: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.main-content {
+	width: 40vw;
+	min-width: 280px;
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 25px;
+	backdrop-filter: invert(80%);
+}
+
+.navigation {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	color: white;
+}
+
+.navigation li {
+	border: 1px solid white;
+	font-size: 1rem;
+	font-weight: 600;
+	text-align: center;
+	padding: 0.6rem 1.2rem;
+	border-radius: 999px;
+	cursor: pointer;
+}
+
+.active {
+	background-color: white;
+	color: black;
+}
+.timer {
+	font-size: 8rem;
+	font-weight: 800;
+	color: white;
+	z-index: 100;
+}
+
+.actions {
+	width: 50%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.start {
+	border-radius: 999px;
+	padding: 0.8rem 1.9rem;
+	font-size: 1.3rem;
+	font-weight: 500;
+}
+
+.reset {
+	background: transparent;
+	color: white;
+	font-size: 3rem;
+
+	&:hover {
+		transform: rotate(180deg);
+		transition: 0.1s;
+	}
+}
+
+.setting {
+	background: transparent;
+	color: white;
+	font-size: 3rem;
+
+	&:hover {
+		transform: scale(1.5);
+		transition: 0.1s;
+	}
+}

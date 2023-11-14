@@ -36,6 +36,23 @@ describe("Timer", () => {
 		timer.reset();
 		expect(timer.getTime().minute).toEqual(25);
 		expect(timer.getTime().second).toEqual(0);
+
+		// again starts
+		timer.start();
+		jest.advanceTimersByTime(10000);
+		expect(timer.getTime().minute).toEqual(24);
+		expect(timer.getTime().second).toEqual(50);
+
+		// Now resets
+		timer.reset();
+		expect(timer.getTime().minute).toEqual(25);
+		expect(timer.getTime().second).toEqual(0);
+
+		// again starts
+		timer.start();
+		jest.advanceTimersByTime(10000);
+		expect(timer.getTime().minute).toEqual(24);
+		expect(timer.getTime().second).toEqual(50);
 	});
 
 	it("should stop after timer completed", () => {
