@@ -1,12 +1,15 @@
+// A single source of truth for different timers: Pomodoro,short-break and long-break
+
 import { Itime } from "./interfaces";
 
-interface IreturnTimer {
+export interface IreturnTimer {
 	start: () => boolean;
 	stop: () => boolean;
 	reset: () => boolean;
-	getTime: () => Itime;
+	getCurrentTime: () => Itime;
 	timesUp: () => boolean;
 	getState: () => boolean;
+	render: () => void;
 }
 
 function Timer(arg: Itime): IreturnTimer {
@@ -58,7 +61,7 @@ function Timer(arg: Itime): IreturnTimer {
 		return true;
 	}
 
-	function getTime(): Itime {
+	function getCurrentTime(): Itime {
 		return time;
 	}
 
@@ -90,7 +93,7 @@ function Timer(arg: Itime): IreturnTimer {
 		}
 	}
 
-	return { start, stop, reset, getTime, timesUp, getState };
+	return { start, stop, reset, getCurrentTime, timesUp, getState, render };
 }
 
 export default Timer;

@@ -8,19 +8,83 @@
 	</head>
 	<body>
 		<div class="bg-screen">
-			<div class="main-content">
+			<aside class="modal">
+				Psst 🤫 <em>Click here for early access</em> to our new aesthetic tool.
+				More themes, features, and of course, Pomodoro.<span class="rm-modal"
+					>X</span
+				>
+			</aside>
+
+			<!-- <header class="header">study with me</header> -->
+
+			<main class="main-content">
 				<nav class="navigation">
 					<li id="pomodoro" class="pomodoro nav active">pomodoro</li>
 					<li id="short" class="short nav">short break</li>
 					<li id="long" class="long nav">long break</li>
 				</nav>
-				<div class="timer"></div>
-				<div class="actions">
+
+				<time class="timer"></time>
+
+				<section class="actions">
 					<button title="start" class="start">start</button>
 					<button title="reset" class="reset">&#8635;</button>
-					<button title="setting" class="setting">&#x21;</button>
+					<button title="setting" class="setting">&#9881;</button>
+				</section>
+			</main>
+
+			<!-- /* setting pop-up styling */ -->
+			<!-- Customise modal -->
+			<aside class="pop-up">
+				<span class="rm-pop_up">X</span>
+				<div class="container">
+						<span>Customise</span>
+						<form>
+							<div class="custom-theme">
+
+								<label for="theme-select">Select Theme:</label>
+								<select id="theme-select">
+									<option value="sunset" selected>Sunset</option>
+									<option value="drown">Drown</option>
+									<option value="street">Street</option>
+									<option value="tree">Tree</option>
+									<option value="lost_in_space">Lost in space</option>
+									<option value="moon">Moon</option>
+								</select>
+							
+							</div>
+
+							<div class="custom-timer">
+
+								<label for="pomodoro-select">Pomodoro:</label>
+								<input
+									id="pomodoro-select"
+									type="number"
+									min="0"
+									pattern="[0-9]*"
+									title="Please enter a positive number" />
+
+								<label for="short-select">Short Break:</label>
+								<input
+									id="short-select"
+									type="number"
+									min="0"
+									pattern="[0-9]*"
+									title="Please enter a positive number" />
+
+								<label for="long-select">Long Break:</label>
+								<input
+								id="long-select"
+								type="number"
+								min="0"
+								pattern="[0-9]*"
+								title="Please enter a positive number" />
+							</div>
+						</form>
+					</div>
 				</div>
-			</div>
+			</aside>
+
 		</div>
 
 		<script src="./index.js"></script>

@@ -1,15 +1,9 @@
-import { Itime } from "../factories/interfaces";
-import { Ipomodoro } from "../factories/time/Pomodoro";
-import { Ilong } from "../factories/time/Long";
-import { Ishort } from "../factories/time/Short";
-import Pomodoro from "../factories/time/Pomodoro";
-import Long from "../factories/time/Long";
-import Short from "../factories/time/Short";
+import Time, { IreturnTime } from "../factories/time";
 
 describe("Time", () => {
-	const pomodoro: Ipomodoro = Pomodoro();
-	const short: Ishort = Short();
-	const long: Ilong = Long();
+	const pomodoro: IreturnTime = Time(25, 0);
+	const short: IreturnTime = Time(5, 0);
+	const long: IreturnTime = Time(10, 0);
 
 	beforeEach(() => {
 		pomodoro;
