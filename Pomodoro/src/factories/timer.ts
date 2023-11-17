@@ -83,7 +83,7 @@ function Timer(arg: Itime): IreturnTimer {
 	}
 
 	function playAudio() {
-		const audio = new Audio("./assets/audio/alert.mp3");
+		const audio = new Audio("./public/assets/audio/alert.mp3");
 		audio.play();
 		setTimeout(function () {
 			audio.pause();
