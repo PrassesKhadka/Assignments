@@ -7,7 +7,8 @@
     "build": "webpack",
     "test": "jest --watchAll",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "gh-page": "git subtree push --prefix public origin gh-pages"
   },
   "keywords": [],
   "author": "",
