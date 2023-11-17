@@ -248,6 +248,12 @@ li {
 		margin-top: 2rem;
 	}
 	& .custom-btn {
+		border-radius: 999px;
+		border: 1px solid white;
+		padding: 0.7rem 1.6rem;
+		font-size: 1.5rem;
+		font-weight: 500;
+		margin: 0.3rem;
 		background-color: white;
 		color: black;
 		margin-top: 2rem;
@@ -257,6 +263,12 @@ li {
 		}
 	}
 	& .cancel-btn {
+		border-radius: 999px;
+		border: 1px solid white;
+		padding: 0.7rem 1.6rem;
+		font-size: 1.5rem;
+		font-weight: 500;
+		margin: 0.3rem;
 		background-color: slategray;
 		color: white;
 		border: none;
