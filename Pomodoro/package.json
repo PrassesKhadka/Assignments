@@ -1,5 +1,5 @@
 {
-  "name": "Pomodoro",
+  "name": "pomodoro",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -7,8 +7,7 @@
     "build": "webpack",
     "test": "jest --watchAll",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "gh-page": "git subtree push --prefix public origin gh-pages"
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
