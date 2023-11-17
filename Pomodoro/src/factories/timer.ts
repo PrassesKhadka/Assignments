@@ -37,6 +37,7 @@ function Timer(arg: Itime): IreturnTimer {
 			interval = setInterval(() => {
 				logic();
 				render();
+				timesUp();
 			}, 1000);
 			active = true;
 			return true;
@@ -49,6 +50,7 @@ function Timer(arg: Itime): IreturnTimer {
 			clearInterval(interval);
 			interval = null;
 			active = false;
+			render();
 			return true;
 		}
 		return false;
@@ -66,8 +68,10 @@ function Timer(arg: Itime): IreturnTimer {
 	}
 
 	function timesUp(): boolean {
-		if (time.minute === 0 && time.second === 0) return true;
-		else return false;
+		if (time.minute === 0 && time.second === 0) {
+			playAudio();
+			return true;
+		} else return false;
 	}
 
 	function getState(): boolean {
@@ -78,19 +82,28 @@ function Timer(arg: Itime): IreturnTimer {
 		return num >= 0 && num <= 9 ? true : false;
 	}
 
-	function render() {
-		const timer = document.querySelector(".timer");
+	function playAudio() {
+		const audio = new Audio("./assets/audio/alert.mp3");
+		audio.play();
+		setTimeout(function () {
+			audio.pause();
+		}, 10000); // Stop after 10 seconds
+	}
 
-		if (timer) {
-			timer.textContent =
-				isSingleDigit(time.minute) && isSingleDigit(time.second)
-					? `0${time.minute}:0${time.second}`
-					: isSingleDigit(time.minute)
-					? `0${time.minute}:${time.second}`
-					: isSingleDigit(time.second)
-					? `${time.minute}:0${time.second}`
-					: `${time.minute}:${time.second}`;
-		}
+	function render() {
+		const timer = document.querySelector(".timer") as HTMLElement;
+		const start = document.querySelector(".start") as HTMLElement;
+
+		timer.textContent =
+			isSingleDigit(time.minute) && isSingleDigit(time.second)
+				? `0${time.minute}:0${time.second}`
+				: isSingleDigit(time.minute)
+				? `0${time.minute}:${time.second}`
+				: isSingleDigit(time.second)
+				? `${time.minute}:0${time.second}`
+				: `${time.minute}:${time.second}`;
+
+		active ? (start.textContent = "pause") : (start.textContent = "start");
 	}
 
 	return { start, stop, reset, getCurrentTime, timesUp, getState, render };

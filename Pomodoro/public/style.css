@@ -20,7 +20,7 @@ li {
 .bg-screen {
 	height: 100vh;
 	width: 100vw;
-	background-image: url("./assets/sunset.png");
+	background-image: url("./assets/images/sunset.png");
 	background-position: fixed;
 	background-attachment: fixed;
 	background-position-x: center;
@@ -143,6 +143,7 @@ li {
 	font-size: 1.5rem;
 	font-weight: 500;
 	margin: 0.3rem;
+
 	/* width: 50%; */
 	&:hover {
 		background-color: transparent;
@@ -238,6 +239,30 @@ li {
 		max-width: 25rem;
 		min-width: 15rem;
 		padding: 0.5rem;
+		/* border: 1px solid white;
+		background-color: black;
+		color: white;
+		border-radius: 5px; */
+	}
+	& .buttons {
+		margin-top: 2rem;
+	}
+	& .custom-btn {
+		background-color: white;
+		color: black;
+		margin-top: 2rem;
+		cursor: pointer;
+		&:hover {
+			background-color: antiquewhite;
+		}
+	}
+	& .cancel-btn {
+		background-color: slategray;
+		color: white;
+		border: none;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }
 

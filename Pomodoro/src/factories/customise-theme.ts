@@ -6,7 +6,7 @@ function Customise_Theme(): IreturnCustomiseTheme {
 	let current: string = "";
 
 	function setTheme(theme: string) {
-		current = `./assets/${theme}.png`;
+		current = `./assets/images/${theme}.png`;
 		render();
 	}
 

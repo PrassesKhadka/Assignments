@@ -11,8 +11,9 @@ const short_btn = document.querySelector(".short") as HTMLElement;
 const long_btn = document.querySelector(".long") as HTMLElement;
 const setting = document.querySelector(".setting") as HTMLElement;
 const pop_up = document.querySelector(".pop-up") as HTMLElement;
-const pop_up_container = document.querySelector(".container") as HTMLElement;
 const remove_pop_up = document.querySelector(".rm-pop_up") as HTMLElement;
+const custom_btn = document.querySelector(".custom-btn") as HTMLElement;
+const cancel_btn = document.querySelector(".cancel-btn") as HTMLElement;
 const theme_select = document.getElementById(
 	"theme-select"
 ) as HTMLSelectElement;
@@ -24,7 +25,7 @@ const short_select = document.getElementById(
 ) as HTMLInputElement;
 const long_select = document.getElementById("long-select") as HTMLInputElement;
 
-// Different timers:Default
+// Different timers: second is set 0 as default
 let pomodoro = Time(25);
 let pomodoroTimer = Timer(pomodoro.getTime());
 let short = Time(5);
@@ -52,7 +53,6 @@ export const handlePomodoroClick = () => {
 	shortTimer.stop();
 	longTimer.stop();
 	initialRender();
-	start.textContent = "start";
 };
 export const handleShortClick = () => {
 	active = "short";
@@ -60,7 +60,6 @@ export const handleShortClick = () => {
 	shortTimer.stop();
 	longTimer.stop();
 	initialRender();
-	start.textContent = "start";
 };
 export const handleLongClick = () => {
 	active = "long";
@@ -68,45 +67,26 @@ export const handleLongClick = () => {
 	shortTimer.stop();
 	longTimer.stop();
 	initialRender();
-	start.textContent = "start";
 };
 
 export const handleStartClick = () => {
 	if (active === "pomodoro") {
 		if (pomodoroTimer.getState()) {
 			pomodoroTimer.stop();
-			if (start) {
-				start.textContent = "start";
-			}
 		} else {
 			pomodoroTimer.start();
-			if (start) {
-				start.textContent = "pause";
-			}
 		}
 	} else if (active === "long") {
 		if (longTimer.getState()) {
 			longTimer.stop();
-			if (start) {
-				start.textContent = "start";
-			}
 		} else {
 			longTimer.start();
-			if (start) {
-				start.textContent = "pause";
-			}
 		}
 	} else {
 		if (shortTimer.getState()) {
 			shortTimer.stop();
-			if (start) {
-				start.textContent = "start";
-			}
 		} else {
 			shortTimer.start();
-			if (start) {
-				start.textContent = "pause";
-			}
 		}
 	}
 };
@@ -146,19 +126,19 @@ const handleTimerValueChange = () => {
 	long = Time(long_select.valueAsNumber);
 	longTimer = Timer(long.getTime());
 	initialRender();
+	handleRemovePopUp();
 };
 
-pomodoro_btn?.addEventListener("click", handlePomodoroClick);
-short_btn?.addEventListener("click", handleShortClick);
-long_btn?.addEventListener("click", handleLongClick);
-start?.addEventListener("click", handleStartClick);
-reset?.addEventListener("click", handleResetClick);
-setting?.addEventListener("click", handleSettingClick);
+pomodoro_btn.addEventListener("click", handlePomodoroClick);
+short_btn.addEventListener("click", handleShortClick);
+long_btn.addEventListener("click", handleLongClick);
+start.addEventListener("click", handleStartClick);
+reset.addEventListener("click", handleResetClick);
+setting.addEventListener("click", handleSettingClick);
 theme_select.addEventListener("change", handleCustomiseTheme);
 remove_pop_up.addEventListener("click", handleRemovePopUp);
-pomodoro_select.addEventListener("change", handleTimerValueChange);
-short_select.addEventListener("change", handleTimerValueChange);
-long_select.addEventListener("change", handleTimerValueChange);
+custom_btn.addEventListener("click", handleTimerValueChange);
+cancel_btn.addEventListener("click", handleRemovePopUp);
 
 initialRender();
 utils();

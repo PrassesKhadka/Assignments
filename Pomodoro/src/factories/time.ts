@@ -5,7 +5,7 @@ export interface IreturnTime {
 }
 
 // default value of second set as 0
-function Time(minute: number, second: number = 0): IreturnTime {
+function Time(minute: number = 0, second: number = 0): IreturnTime {
 	const time: Itime = {
 		minute,
 		second,
