@@ -3,42 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link href="./dist/index.css" rel="stylesheet">
     <title>GitHub Profile</title>
 </head>
 <body>
-    <header><h1>GitHubFinder</h1></header>
-    <input id="search" type="text" placeholder="Search">
+    <header>
+        <a href="#"><h1>GitHub<span class="decoration">Finder</span></h1></a>
 
+        <form>
+            <input id="search" type="text" placeholder="Search" autocomplete="off">
+            <button id="search_btn" type="submit"><span class="material-icons input-icon">search</span></button>
+        </form>
+
+        <div class="dark-mode">
+            <button class="toggle-btn">Dark</button>
+        </div>
+    </header>
+        
     <!-- Template but datas created dynamically -->
 
     <div id="container">
-        <div id="user-profile" class="profile-section"></div>
-        <div id="repo-stats" class="profile-section"></div>
-        <div id="repos" class="repos"></div>
+        <div class="inner-container">
+            <div id="user-profile" class="profile-section"></div>
+            <div id="repo-stats" class="profile-section"></div>
+        </div>
+        <div class="another-container">
+            <div class="nav" id="nav">
+                <nav>
+                    <ul>
+                        <li id="repo-btn"></li>
+                        <li id="followers-btn"></li>
+                        <li id="following-btn"></li>
+                    </ul>
+                </nav>
+                <div class="render" id="render"></div>
+            </div>
+        </div>
     </div>
     
-    <!-- profile -->
-    <!-- <section class="profile"> -->
-        <!-- basic info -->
-        <!-- <article class="basic-info">
-            <div class="image"></div>
-            <div class="info">
-                <h2 class="name"></h2>
-                <a class="blog"></a>
-                <p class="bio"></p>
-                <button>
-                    <a class="url"></a>
-                </button>
-            </div>
-        </article> -->
-        
-        <!-- github info -->
-        <!-- <article class="additional-info"></article> -->
-    <!-- </section> -->
-
-    <!-- repos -->
-
     <script src="./dist/bundle.js"></script>
 </body>
 </html>

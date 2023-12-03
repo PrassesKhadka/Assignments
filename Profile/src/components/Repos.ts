@@ -1,7 +1,13 @@
 import { IRepos } from "../interface";
 
 export function renderRepos(repos:IRepos[]){
-    const repositories=document.querySelector(".repos")
+    const render=document.querySelector("#render")
+    render.innerHTML=""
+    const repositories=document.createElement('div')
+    repositories.className="repos"
+    repositories.id="repos"
+    render.appendChild(repositories)
+
     repos.forEach((repo:IRepos)=>{
         const repo_card=document.createElement('div');
         repo_card.className='repo-card'
@@ -15,8 +21,16 @@ export function renderRepos(repos:IRepos[]){
             <p>${repo.description || 'No description available.'}</p>
         </div>
         <div>
-            <p>Stars: ${repo.stargazers_count}</p>
-            <p>Forks: ${repo.forks_count}</p>
+            <p>
+                <span class="material-icons">
+                    star
+                </span>
+                <span>${repo.stargazers_count}<span>
+            </p>
+            <p>
+                <span><img src="./dist/assets/fork-icon.svg"></span> 
+                <span>${repo.forks_count}</span>
+            </p>
         </div>
         `
         repositories.appendChild(repo_card)

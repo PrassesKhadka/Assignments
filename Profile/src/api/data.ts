@@ -1,4 +1,4 @@
-import { IRepos,IUser } from "../interface";
+import { IRepos,IUser,IFollower } from "../interface";
 
 // default argument prasseskhadka
 export function getDatas(username:string="prasseskhadka"){
@@ -19,21 +19,21 @@ export function getDatas(username:string="prasseskhadka"){
         return data;
     }
 
-    // // follower endpoint
-    // async function getFollowers(){
-    //     const response = await fetch(`https://api.github.com/users/${username}`);
-    //     const {data} = await response.json();
-    //     userData={...data};
-    // }
+    // followers endpoint
+    async function getFollowers():Promise<IFollower[]>{
+        const response = await fetch(`https://api.github.com/users/${username}/followers`);
+        const data = await response.json();
+        return data;
+    }
 
-    // // following endpoint 
-    // function getFollowing(){
-    //     const response = await fetch(`https://api.github.com/users/${username}`);
-    //     const {data} = await response.json();
-    //     userData={...data};
-    // }
+    // following endpoint
+    async function getFollowing():Promise<IFollower[]>{
+        const response = await fetch(`https://api.github.com/users/${username}/following`);
+        const data = await response.json();
+        return data;
+    }
 
-    return {getUser,getRepos}
+    return {getUser,getRepos,getFollowers,getFollowing}
 }
 
   

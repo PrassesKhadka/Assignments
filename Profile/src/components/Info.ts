@@ -16,13 +16,20 @@ export function renderInfo(user:IUser){
     userInfo.innerHTML = `
         <h2>${name}</h2>
         <p>${bio}</p>
-        <button><a href=${url} class="social-link" target="_blank">See on GitHub</a></button>
+        <button>
+            <a href=${url} class="social-link" target="_blank">
+                <span >See on GitHub</span>
+                <span class="material-icons link">
+                    link
+                </span>
+            </a>
+        </button>
     `;
 
     const socialLinks = document.createElement('div');
     socialLinks.innerHTML = `
-        <a href="https://twitter.com/johndoe" class="social-link" target="_blank">Twitter</a>
-        <a href="https://linkedin.com/in/johndoe" class="social-link" target="_blank">LinkedIn</a>
+        <a href=${twitter_username} class="social-link" target="_blank">Twitter</a>
+        <a href=${blog} class="social-link" target="_blank">Blog</a>
     `;
 
     // Append elements to the user profile container
@@ -33,7 +40,7 @@ export function renderInfo(user:IUser){
     // Create repository statistics container
     const repoStatsContainer = document.getElementById('repo-stats');
     repoStatsContainer.innerHTML = `
-        <p>${public_repos} Repos</p>
+        <p>${public_repos} repos</p>
         <p>${followers} followers</p>
         <p>${following} following</p>
     `;
