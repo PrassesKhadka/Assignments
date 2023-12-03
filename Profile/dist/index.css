@@ -1,0 +1,101 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+:root{
+    --gray:#6082B6;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:var(--gray);
+    color:white;
+}
+
+#container {
+    width:clamp(300px,100%,350px);
+    border:5px solid red;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    /* justify-content: center; */
+    flex-wrap: wrap;
+}
+
+.profile-section {
+    border:5px solid green;
+    width:100%;
+}
+
+#user-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+.user-info{
+    border:5px solid yellow;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+
+    & p{
+        display:inline-block;
+        width:100%;
+        word-wrap: break-word;
+    }
+
+    & button{
+        display:inline-block;
+        width:100%;
+        background-color:red;
+
+    }
+}
+.social-link {
+    color: #0366d6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Repo card */
+.repos{
+    border:5px solid orange;
+}
+.repo-card {
+    border:5px solid rgb(125, 250, 114);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    & div:first-child{
+        border:5px solid white;
+
+        & div:first-child
+        {
+            border:5px solid red;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & h2{
+                display:block;
+                font-size: medium;
+            }
+            & p{
+                display:inline-block;
+                padding:5px 8px;
+                background-color: slategray;
+                border-radius: 999px;
+            }
+        }
+    }
+}
+
+.repo-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
