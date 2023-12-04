@@ -25,12 +25,14 @@ export async function render(username?: string) {
   const user_profile = document.querySelector("#user-profile");
   const repo_stats = document.querySelector("#repo-stats");
   const repos_id = document.querySelector("#repos") as HTMLDivElement;
+  const render_id = document.querySelector("#render") as HTMLDivElement;
   const nav = document.querySelector("#nav");
   const repo_btn = document.querySelector("#repo-btn");
   const followers_btn = document.querySelector("#followers-btn");
   const following_btn = document.querySelector("#following-btn");
 
   user_profile.innerHTML = "";
+  render_id.innerHTML="";
   repo_stats.innerHTML = "";
   if(repos_id){
     repos_id.innerHTML = "";
@@ -44,14 +46,17 @@ export async function render(username?: string) {
   const followers = await datas.getFollowers();
   const following = await datas.getFollowing();
 
+
   // renders info
   renderInfo(user);
 
   // renders navigation buttons
-  repo_btn.textContent = "Repositories";
-  repo_btn.className="active"
-  followers_btn.textContent = "Followers";
-  following_btn.textContent = "Following";
+  repo_btn.textContent = `Repositories (${user.public_repos})`;
+  repo_btn.className="active";
+  followers_btn.textContent = `Followers (${user.followers})`;
+  followers_btn.classList.remove("active");
+  following_btn.textContent = `Following (${user.following})`;
+  following_btn.classList.remove("active");
   // event listeners:
   repo_btn.addEventListener("click",()=>{
     repo_btn.classList.add("active")

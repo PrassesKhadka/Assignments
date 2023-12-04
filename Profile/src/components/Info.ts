@@ -10,6 +10,7 @@ export function renderInfo(user:IUser){
     userAvatar.id = 'user-avatar';
     userAvatar.src = `${avatar_url}`; 
     userAvatar.alt = 'User Avatar';
+    userAvatar.className="skeleton";
 
     const userInfo = document.createElement('div');
     userInfo.className="user-info";
