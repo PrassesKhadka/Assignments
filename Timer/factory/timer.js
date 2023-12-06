@@ -2,7 +2,7 @@ function Timer(value) {
 	// datas:
 
 	const timer = document.querySelector("#timer");
-	let myInterval;
+	const play = document.querySelector("#play");
 
 	// functions:
 
@@ -33,11 +33,11 @@ function Timer(value) {
 				: `${value.min}: ${value.sec}`;
 	}
 
-	myInterval = setInterval(() => {
+	let myInterval = setInterval(() => {
 		logic();
 		mount();
 	}, 1000);
-
+	
 	// function togglePlay() {
 	// 	play = !play;
 	// 	if (play) {

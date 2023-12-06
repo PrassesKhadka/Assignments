@@ -1,4 +1,4 @@
-function Time(min, sec) {
+function Time(min=5, sec=0) {
 	// private data
 	const time = {
 		min,
