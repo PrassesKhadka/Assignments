@@ -1,58 +1,87 @@
-*{
-    box-sizing: border-box;
-    margin:0;
-    padding:0;
-    border:0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
-body{
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color:slategray;
+    background-color: white;
+    transition: background-color 5s ease-in-out ;
 }
 
 /* For skeleton loading */
-.skeleton{
-    opacity:0.7;
-    animation:skeleton-loading 1s infinite alternate;
+.skeleton {
+  opacity: 0.7;
+  animation: skeleton-loading 1s infinite alternate;
 }
 
 @keyframes skeleton-loading {
-    0%{
-        background-color: hsl(200,20%,70%);
-    }
-    100%{
-        background-color: hsl(200,20%,95%);
-    }
-    
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
 }
 
-.skeleton-text{
-    width:50%;
-    height: 10px;
-    margin-bottom: .25rem;
-    border-radius: .125rem;
+.skeleton-text {
+  width: 50%;
+  height: 10px;
+  margin-bottom: 0.25rem;
+  border-radius: 0.125rem;
 }
-.skeleton-text:nth-child(2){
-    width:10%;
+.skeleton-text:nth-child(1) {
+  width: 50%;
+  height: 20px;
 }
-.skeleton-text:nth-child(3){
-    width:30%;
+.skeleton-text:nth-child(2) {
+  width: 20%;
+  height: 20px;
 }
-.skeleton-text:last-child{
-    margin-bottom: 0;
-    width:20%;
+.skeleton-text:nth-child(3) {
+  margin-top: 15px;
+  width: 10%;
+}
+.skeleton-text:nth-child(4) {
+  width: 30%;
+}
+.skeleton-text:last-child {
+  margin-bottom: 0;
+  width: 20%;
+}
+
+/* For navigation */
+.navigation {
+  margin-top: 20px;
+}
+
+.navigation button {
+  margin: 5px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.active{
+    background-color: rgb(60, 60, 160);
+    color:white;
 }
 
 /* For box */
 .box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  h2 {
-    color: #333;
-  }
+h2 {
+  color: #333;
+}
 
-  p {
-    color: #666;
-  }
+p {
+  color: #666;
+}

@@ -15,18 +15,26 @@ interface IstoryCache{
 // as default each page has 10 stories
 export function Page(eachPage:number=10):IreturnPage{
     let pageNo=1;
+    // all stories
+    let stories:number[]=[];
+    // chosen stories for this page
     let topStories:number[]=[];
     let story:IreturnGetStory[]=[];
     let storyCache:IstoryCache={};
     
     const nextPage=()=>pageNo++;
-    const previousPage=()=>pageNo--;
+    const previousPage=()=>{
+        if(pageNo!=1)
+            pageNo--;
+    }
     const goToPage=(no:number)=>pageNo=no;
     
     // data filtered based on the pageNo. Eg:for first page only 0-9 data given
     async function dataFilter(){
         // Fetch the 500 top stories
-        const stories=await getData().getStories()
+        if(stories.length===0){
+            stories=await getData().getStories()
+        }
         let start=(pageNo-1)*eachPage;
         let end=(pageNo*eachPage);
         // Only keep the stories that we need in this page #id's
@@ -37,18 +45,19 @@ export function Page(eachPage:number=10):IreturnPage{
         // caching
         if(storyCache[pageNo.toString()]){
             story=storyCache[pageNo]
-        }
-
-        const storyPromise=await topStories.map(async (id)=>{
+        }else{
+            const storyPromise=await topStories.map(async (id)=>{
                 const eachStory=await getData().getStory(id)
                 return eachStory
-        })
+            })
+            story=await Promise.all(storyPromise)
+            // cache
+            storyCache[pageNo.toString()]=await Promise.all(storyPromise)
+        }
 
-        story=await Promise.all(storyPromise)
-        // cache
-        storyCache[pageNo.toString()]=await Promise.all(storyPromise)
     } 
 
+    // To render skeleton loading page:
     function renderSkeleton(){
         const innerContainer=document.querySelector(".inner-container");
         for(let i=0;i<5;i++)
@@ -60,10 +69,15 @@ export function Page(eachPage:number=10):IreturnPage{
                     <div class="skeleton skeleton-text"></div>
                     <div class="skeleton skeleton-text"></div>
                     <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text"></div>
                 </div>
             `
             innerContainer.appendChild(div)
         }
+
+    }
+
+    function renderDetailPage(id:number){
 
     }
 

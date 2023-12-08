@@ -19,6 +19,7 @@ export function getData():IreturnGetData{
     async function getStory(id:number){
         const response=await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
         const data=await response.json();
+        console.log(data)
         return data;
     }
 
