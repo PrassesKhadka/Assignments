@@ -2,7 +2,7 @@ import { getData } from "./api/data";
 import { Page } from "./factories/page";
 
 // Keeping 5 stories on each page;
-const { nextPage, previousPage, goToPage, render } = Page(5);
+const { nextPage, previousPage, goToIndex, render } = Page(5);
 
 // selectors:
 const inner_container=document.querySelector(".inner-container")
@@ -15,7 +15,7 @@ const prev_btn=document.querySelector(".previous-btn")
 navigations.forEach((element:HTMLButtonElement,index:number)=>{
     element.addEventListener("click",()=>{
         inner_container.innerHTML=""
-        goToPage(index+1)
+        goToIndex(index+1)
         render()
 
         // add active class to show->that specific button active when clicked;

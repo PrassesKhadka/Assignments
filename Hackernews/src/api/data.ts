@@ -1,8 +1,9 @@
-import { IreturnGetStory } from "../interface";
+import { IreturnGetComments, IreturnGetStory } from "../interface";
 
 interface IreturnGetData{
     getStories:()=>Promise<number[]>;
     getStory:(id:number)=>Promise<IreturnGetStory>;
+    getComment:(id:number)=>Promise<IreturnGetComments>;
 }
 
 export function getData():IreturnGetData{
@@ -16,13 +17,18 @@ export function getData():IreturnGetData{
     }
 
     // each story
-    async function getStory(id:number){
+    async function getStory(id:number):Promise<IreturnGetStory>{
         const response=await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
         const data=await response.json();
-        console.log(data)
         return data;
     }
 
+    // each comment
+    async function getComment(id:number):Promise<IreturnGetComments>{
+        const response=await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
+        const data=await response.json();
+        return data;
+    }
     
-    return {getStories,getStory}
+    return {getStories,getStory,getComment}
 }

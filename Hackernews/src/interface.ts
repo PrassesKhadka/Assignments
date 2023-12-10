@@ -11,3 +11,13 @@ export interface IreturnGetStory {
     type:        string;
     url:         string;
 }
+
+export interface IreturnGetComments {
+    by:     string;
+    id:     number;
+    kids?:   number[];
+    parent: number;
+    text:   string;
+    time:   number;
+    type:   string;
+}
