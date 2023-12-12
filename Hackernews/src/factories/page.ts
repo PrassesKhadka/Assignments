@@ -1,6 +1,8 @@
-import { lowerCase } from "cypress/types/lodash";
+import { findIndex, lowerCase } from "cypress/types/lodash";
 import { getData } from "../api/data";
 import { IreturnGetComments, IreturnGetStory } from "../interface";
+import { timeSince } from "../utils.ts/timeSince";
+import { renderBookmark } from "../utils.ts/bookmark";
 
 interface IreturnPage {
   indexNo: number;
@@ -92,16 +94,17 @@ export function Page(eachIndex: number = 10): IreturnPage {
 
   async function renderComments(comments: number[]): Promise<HTMLElement> {
     // selector
-    const inner_comment_box=document.querySelector(".inner-comment-box")
-    
+    const inner_comment_box = document.querySelector(".inner-comment-box");
+
     // creating a div to return after appending
     const node = document.createElement("div");
-    node.classList.add("inner-comment-box")
+    node.classList.add("inner-comment-box");
 
     comments.forEach(async (id: number) => {
-
       // data fetch
       const data: IreturnGetComments = await getData().getComment(id);
+      // data nedded:
+      const { by, kids, text, time } = data;
 
       // Create container div
       const div = document.createElement("div");
@@ -125,43 +128,53 @@ export function Page(eachIndex: number = 10): IreturnPage {
 
       // Create author element
       const authorElement = document.createElement("p");
-      authorElement.textContent = `${data.by}`;
+      authorElement.textContent = `${by}`;
       authorElement.classList.add("user-name");
 
       // Create time element
-      const timeElement = document.createElement("p");
-      const formattedTime = new Date(data.time).toLocaleString();
-      timeElement.textContent = `Time: ${formattedTime}`;
-      timeElement.classList.add("comment-text");
-
-      userDetails.append(authorElement, timeElement);
+      const timeElement = document.createElement("span");
+      timeElement.textContent = timeSince(time);
+      timeElement.classList.add("comment-time");
 
       // Create comment-text element
       const textElement = document.createElement("div");
       textElement.classList.add("comment-text");
-      textElement.innerHTML = data.text;
+      // innerHTML because text contains html embeded inside it so
+      textElement.innerHTML = text;
 
       // Reply element
       const replyIcon = document.createElement("div");
       replyIcon.classList.add("reply-icon");
       replyIcon.innerHTML = `
           <span class="material-icons">comment</span>
-          ${data.kids ? `<span>${data.kids.length}</span>` : `<span>0</span>`}
+          ${kids ? `<span>${kids.length}</span>` : `<span>0</span>`}
       `;
 
       // Append elements to the container
+      userDetails.append(authorElement, timeElement);
       div.append(userIcon, userDetails, textElement, replyIcon);
       node.append(div);
 
       // Event Listener
+      let active = false;
       async function handleOnCommentClick() {
-        if (data.kids.length === 0)
-          replyIcon.removeEventListener("click", handleOnCommentClick);
-        else {
-          const node = await renderComments(data.kids);
-          div.append(node);
+        // active->once clicked comment data fetched now when again clicked the comment will be hidden and toggle with each click but no data fetch
+        if (active === false) {
+          active = true;
+          if (!kids)
+            replyIcon.removeEventListener("click", handleOnCommentClick);
+          else {
+            const node = await renderComments(kids);
+            div.append(node);
+            // replyIcon.removeEventListener("click", handleOnCommentClick);
+          }
+        } else {
+          // To show comment when clicked and hide when again clicked
+          const innerCommentBox = div.querySelector(".inner-comment-box");
+          // since display:none is not inherited,we have to apply hide on every comment and cannot just apply hide on inner-comment-box(root element)
+          const comments = innerCommentBox.querySelectorAll(".comment");
+          comments.forEach((comment) => comment.classList.toggle("hide"));
         }
-        replyIcon.removeEventListener("click", handleOnCommentClick);
       }
 
       replyIcon.addEventListener("click", handleOnCommentClick);
@@ -171,39 +184,48 @@ export function Page(eachIndex: number = 10): IreturnPage {
   }
 
   async function renderDetailPage(element: IreturnGetStory) {
+    // data
+    const { by, kids, score, time, title, url } = element;
+
+    // selector
     const innerContainer = document.querySelector(".inner-container");
+    const bookmark_div = document.querySelector(".bookmark");
     const commentBox = document.createElement("div");
     commentBox.classList.add("comment-box");
 
+    // clearing
+    bookmark_div.innerHTML="";
     innerContainer.innerHTML = "";
+
     // Create container div
     const div = document.createElement("div");
     div.classList.add("box");
 
     // Create title element
     const titleElement = document.createElement("h2");
-    titleElement.textContent = element.title;
+    titleElement.textContent = title;
 
     // Create author element
     const authorElement = document.createElement("p");
-    authorElement.textContent = `By: ${element.by}`;
+    authorElement.textContent = `${by}`;
 
     // Create URL element
-    const urlElement = document.createElement("p");
+    const urlElement = document.createElement("div");
     const urlLink = document.createElement("a");
-    urlLink.href = element.url;
-    urlLink.textContent = element.url;
-    urlElement.appendChild(document.createTextNode("URL: "));
-    urlElement.appendChild(urlLink);
+    urlLink.href = url;
+    urlLink.target = "_blank";
+    urlLink.innerHTML = `<span class="material-icons">open_in_new</span>`;
+    urlElement.append(urlLink);
 
     // Create time element
     const timeElement = document.createElement("p");
-    const formattedTime = new Date(element.time).toLocaleString();
-    timeElement.textContent = `Time: ${formattedTime}`;
+    timeElement.textContent = timeSince(time);
 
     // Create author element
     const commentElement = document.createElement("p");
-    commentElement.textContent = `no.of comments: ${element.kids.length}`;
+    commentElement.innerHTML = `<span class="material-icons">comment</span> ${
+      kids.length ? kids.length : "0"
+    }`;
 
     // Append elements to the container
     div.appendChild(titleElement);
@@ -213,10 +235,10 @@ export function Page(eachIndex: number = 10): IreturnPage {
     div.appendChild(commentElement);
 
     // Now For comments:
-    if (element.kids.length === 0) {
-      commentBox.innerHTML = "No Comments to Show";
+    if (kids.length === 0) {
+      innerContainer.innerHTML = "No Comments to Show";
     } else {
-      const node = await renderComments(element.kids);
+      const node = await renderComments(kids);
       commentBox.append(node);
     }
 
@@ -224,10 +246,127 @@ export function Page(eachIndex: number = 10): IreturnPage {
     innerContainer.append(div, commentBox);
   }
 
+  // To render bookmark
+  function renderBookmark() {
+    const bookmark = document.querySelector(".bookmark");
+    const bookmarkedItem: IreturnGetStory[] =
+      JSON.parse(localStorage.getItem("bookmark")) || [];
+
+    bookmark.innerHTML = "";
+    bookmarkedItem.forEach((story: IreturnGetStory) => {
+      renderStory(story, bookmark);
+    });
+  }
+
+  // inside innerContainer it will be appended
+  function renderStory(element: IreturnGetStory, innerContainer: Element) {
+    // data needed
+    const { by, time, url, title, kids, score } = element;
+
+    // Create container div
+    const div = document.createElement("div");
+    div.classList.add("box");
+
+    const upper_box = document.createElement("div");
+    upper_box.classList.add("upper-box");
+    const lower_box = document.createElement("div");
+    lower_box.classList.add("lower-box");
+
+    // Create title element
+    const titleElement = document.createElement("div");
+    titleElement.classList.add("title");
+    titleElement.textContent = title;
+
+    // Create author element
+    const authorElement = document.createElement("div");
+    authorElement.innerHTML = `<div class="author"><span class="material-icons">person</span> ${by}</div>`;
+
+    // Create comment element
+    const commentElement = document.createElement("div");
+    commentElement.classList.add("comment-box");
+    commentElement.innerHTML = `<span class="material-icons">comment</span><span>${
+      kids ? kids.length : "0"
+    }</span>`;
+
+    // Create score element
+    const scoreElement = document.createElement("div");
+    scoreElement.classList.add("score");
+    scoreElement.innerHTML = `<span class="material-icons">star</span><span>${score}</span>`;
+
+    // Create time element
+    const timeElement = document.createElement("div");
+    timeElement.classList.add("time");
+    timeElement.innerHTML = `<i class="material-icons">access_time</i> Published ${timeSince(
+      time
+    )}`;
+
+    // Create URL element
+    const urlElement = document.createElement("div");
+    const urlLink = document.createElement("a");
+    urlLink.href = url;
+    urlLink.target = "_blank";
+    urlLink.innerHTML = `<span class="material-icons">open_in_new</span>`;
+    urlElement.append(urlLink);
+
+    // Create time element
+    const saveElement = document.createElement("span");
+    saveElement.classList.add("save");
+    saveElement.innerHTML = `<span class="material-icons">bookmark</span>`;
+
+    // Append container to the body
+    upper_box.append(titleElement);
+    lower_box.append(
+      authorElement,
+      scoreElement,
+      commentElement,
+      timeElement,
+      urlElement,
+      saveElement
+    );
+    div.append(upper_box, lower_box);
+    innerContainer.appendChild(div);
+
+    // Event Listeners
+
+    // To show detail page / comment section
+    titleElement.addEventListener("click", () => {
+      renderDetailPage(element);
+    });
+
+    // To bookmark stories
+    let active = false;
+    saveElement.addEventListener("click", () => {
+      // To change color of the bookmark icon
+      active = !active;
+      console.log(active)
+      // selector
+      const bookmark_div = document.querySelector(".bookmark");
+      const bookmark_icon = document.querySelector(".save");
+      const icon = bookmark_icon.getElementsByTagName("span")[0] as HTMLSpanElement;
+    
+      active ? (icon.style.color = "blue") : (icon.style.color = "white");
+
+      const bookmark: IreturnGetStory[] =
+        JSON.parse(localStorage.getItem("bookmark")) || [];
+      const index = bookmark.findIndex((story) => story.id === element.id);
+      index === -1 ? bookmark.push(element) : bookmark.splice(index, 1);
+
+      // update localstorage
+      localStorage.setItem("bookmark", JSON.stringify(bookmark));
+
+      // render it
+      bookmark_div.innerHTML = "";
+      renderBookmark();
+    });
+  }
+
+  // To render the main stories pages
   async function render() {
     // selectors
     const innerContainer = document.querySelector(".inner-container");
 
+    // Render bookmark
+    renderBookmark();
     // Renders skeleton loading
     renderSkeleton();
 
@@ -238,54 +377,7 @@ export function Page(eachIndex: number = 10): IreturnPage {
     innerContainer.innerHTML = "";
 
     story.forEach((element) => {
-      // Create container div
-      const div = document.createElement("div");
-      div.classList.add("box");
-
-      const upper_box = document.createElement("div");
-      upper_box.classList.add("upper-box");
-      const lower_box = document.createElement("div");
-      lower_box.classList.add("lower-box");
-
-      // Create title element
-      const titleElement = document.createElement("div");
-      titleElement.classList.add("title")
-      titleElement.textContent = element.title;
-
-      
-      // Create author element
-      const authorElement = document.createElement("div");
-      authorElement.innerHTML = `<div class="author"><span class="material-icons">person</span> ${element.by}</div>`;
-
-      // Create comment element
-      const commentElement = document.createElement("div");
-      commentElement.classList.add("comment-box")
-      commentElement.innerHTML = `<span class="material-icons">comment</span><span>${element.kids ? element.kids.length : '0'}</span>`;
-      
-      // Create time element
-     
-      const timeElement = document.createElement("p");
-      const formattedTime = new Date(element.time).toLocaleString();
-      timeElement.textContent = `${formattedTime}`;
-      
-      // Create URL element
-      const urlElement = document.createElement("div");
-      const urlLink = document.createElement("a");
-      urlLink.href = element.url;
-      urlLink.target = "_blank";
-      urlLink.innerHTML= `<span class="material-icons">open_in_new</span>`;
-      urlElement.append(urlLink);
-      
-      // Append container to the body
-      upper_box.append(titleElement)
-      lower_box.append(authorElement,commentElement,timeElement,urlElement)
-      div.append(upper_box,lower_box)
-      innerContainer.appendChild(div);
-
-      // Event Listeners
-      titleElement.addEventListener("click", () => {
-        renderDetailPage(element);
-      });
+      renderStory(element, innerContainer);
     });
   }
 

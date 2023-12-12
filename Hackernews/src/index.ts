@@ -1,8 +1,4 @@
-import { getData } from "./api/data";
 import { Page } from "./factories/page";
-
-// Keeping 5 stories on each page;
-const { nextPage, previousPage, goToIndex, render } = Page(5);
 
 // selectors:
 const inner_container=document.querySelector(".inner-container")
@@ -11,7 +7,11 @@ const next_btn=document.querySelector(".next-btn")
 const prev_btn=document.querySelector(".previous-btn")
 
 
+// Keeping 5 stories on each page;
+const { nextPage, previousPage, goToIndex, render } = Page(5);
+
 // For event Listeners 
+// when navigation buttons clicked
 navigations.forEach((element:HTMLButtonElement,index:number)=>{
     element.addEventListener("click",()=>{
         inner_container.innerHTML=""
@@ -27,6 +27,7 @@ navigations.forEach((element:HTMLButtonElement,index:number)=>{
     })
 })
 
+// when next button clicked
 next_btn.addEventListener("click",()=>{
     inner_container.innerHTML=""
     nextPage()
@@ -48,6 +49,8 @@ next_btn.addEventListener("click",()=>{
 
     })
 })
+
+// when previous button clicked
 prev_btn.addEventListener("click",()=>{
     inner_container.innerHTML=""
     previousPage()
@@ -74,5 +77,5 @@ prev_btn.addEventListener("click",()=>{
     })
 })
 
-
+// initial render 1st page
 render();
