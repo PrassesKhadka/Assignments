@@ -5,49 +5,49 @@
   border: 0;
 }
 
-:root{
-  --body-background:white;
-  --card-background:#191A23;
-  --h1-text:white;
-  --p-text:white;
-  --a-text:white;
+:root {
+  --body-background: white;
+  --card-background: white;
+  --h1-text: black;
+  --p-text: black;
+  --a-text: black;
 }
 :root.dark {
-  --body-background:gray;
-  --card-background:rgb(103, 99, 99);
-  --h1-text:white;
+  --body-background: gray;
+  --card-background: rgb(103, 99, 99);
+  --h1-text: white;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    color:slategray;
-    background-color:var(--body-background);
-    /* transition: background-color 5s ease-in-out ; */
-    padding:5px clamp(5px,5%,150px);
-    min-height: 100vh;
-    width:100vw;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--body-background);
+  /* transition: background-color 5s ease-in-out ; */
+  padding: 5px clamp(5px, 5%, 150px);
+  min-height: 100vh;
+  width: 100vw;
 }
-a{
-  color:var(--a-text);
+a {
+  color: var(--a-text);
+  text-decoration: none;
 }
-span{
-  color:white;
+span {
+  color: black;
 }
-i{
-  color:white;
+i {
+  color: black;
 }
-.hide{
-  display:none;
-  border:10px solid red;
+.hide {
+  display: none;
+  border: 10px solid red;
 }
-.show{
-  display:block;
+.show {
+  display: block;
 }
 
 /* For skeleton loading */
 .skeleton {
   width: 500px;
-  height:100%;
+  height: 100%;
   opacity: 0.7;
   animation: skeleton-loading 1s infinite alternate;
 }
@@ -64,7 +64,7 @@ i{
 .skeleton-text {
   width: 50%;
   height: 10px;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   border-radius: 0.125rem;
 }
 .skeleton-text:nth-child(1) {
@@ -75,25 +75,12 @@ i{
   width: 20%;
   height: 20px;
 }
-.skeleton-text:nth-child(3) {
-  margin-top: 15px;
-  width: 10%;
-}
-.skeleton-text:nth-child(4) {
-  width: 30%;
-}
-.skeleton-text:last-child {
-  margin-bottom: 0;
-  width: 20%;
-}
-
 
 /* For inner container */
-.inner-container{
-  margin:10px 0;
-  display:flex;
+.inner-container {
+  margin: 10px 0;
+  display: flex;
   flex-direction: column;
-  gap:15px;
 }
 
 /* For navigation */
@@ -114,82 +101,88 @@ i{
   transition: background-color 0.5s ease-in-out;
 }
 
-.active{
-    background-color: rgb(60, 60, 160);
-    color:white;
+.active {
+  background-color: rgb(60, 60, 160);
+  color: white;
 }
 /* For bookmark */
 
-.bookmark div{
-  display:flex;
+.bookmark div {
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin:10px 0 ;
+  margin: 10px 0;
 }
+
 /* For box */
 .box {
-  width:100%;
+  width: 100%;
   padding: 15px 8px;
+  border-bottom: 1px solid black;
   /* border-radius: 10px; */
   background-color: var(--card-background);
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
-.upper-box{
+.upper-box {
   text-align: left;
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: left;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 
-  & .title{
-    color:var(--h1-text);
+  & .title {
+    color: var(--h1-text);
     font-size: 1.6rem;
     font-weight: 700;
     text-align: left;
     text-wrap: wrap;
-    cursor:pointer;
+    cursor: pointer;
   }
 }
-.lower-box{
+.lower-box {
   text-align: center;
-  margin-top:10px;
-  display:flex;
+  margin-top: 10px;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: left;
-  gap:20px;
-  
-  & .author{
-    display:flex;
+  gap: 20px;
+
+  & .author {
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap:2px;
-    justify-content: center;
-    cursor:pointer
-  }
-  & .comment-box{
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap:4px;
+    gap: 2px;
+    color: black;
     justify-content: center;
     cursor: pointer;
   }
-  & .time{
+  & .comment-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: black;
+    gap: 4px;
+    justify-content: center;
+    cursor: pointer;
+  }
+  & .time {
+    display: flex;
+    color: black;
+    align-items: center;
+    gap: 4px;
+  }
+  & .score {
     display: flex;
     align-items: center;
-    gap:2px;
+    color: black;
+    gap: 2px;
   }
-  & .score{
-    display: flex;
-    align-items: center;
-    gap:2px;
-  }
-  & .save{
-    & span{
-      color: white;
-      cursor:pointer;
+  & .save {
+    & span {
+      color: black;
+      cursor: pointer;
     }
   }
 }
@@ -199,31 +192,31 @@ i{
 .comment-box {
 }
 
-.inner-comment-box{
+.inner-comment-box {
   /* border-left:3px solid black; */
-  width:100%;
-  height:100%;
-  padding:10px;
-  margin-left:25px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  margin-left: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap:35px;
+  gap: 35px;
 
-  &:first-child{
-    border:0;
-    margin:0;
+  &:first-child {
+    border: 0;
+    margin: 0;
   }
 }
 
-.comment{
-  width:100%;
+.comment {
+  width: 100%;
   padding: 15px;
   background-color: var(--card-background);
   border-bottom: 2px solid slategray;
-  word-break: break-all;
-  &:last-child{
-    border:0;
+  word-wrap: break-word;
+  &:last-child {
+    border: 0;
   }
 }
 
@@ -234,12 +227,12 @@ i{
   background-color: #ddd;
   display: inline-block;
   margin-right: 10px;
-  position:relative;
+  position: relative;
 
-  & span{
+  & span {
     position: absolute;
-    top:1px;
-    left:2px;
+    top: 1px;
+    left: 2px;
     font-size: 35px;
   }
 }
@@ -251,12 +244,12 @@ i{
 
 .user-name {
   font-weight: bold;
-  color:white;
+  color: black;
   /* margin-bottom: 5px; */
 }
 
 .comment-time {
-  color: #666;
+  color: black;
 }
 
 .comment-text {
@@ -270,10 +263,73 @@ i{
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap:6px;
+  gap: 6px;
 }
 
 .reply-count {
   margin-left: 5px;
   color: #666;
+}
+
+/* For navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+
+  & .logo {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  & .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    & div {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  & .bookmark-btn {
+    display: block;
+    cursor: pointer;
+    font-size: 2rem;
+    color: black;
+  }
+
+  & #profileUsername {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  & #profilePicture {
+    border-radius: 50%;
+    height: 2.5rem;
+  }
+
+  & #google-login-btn {
+    border: 1px solid black;
+    background-color: white;
+    padding: 0.7rem 2rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  & #google-sign-out-btn {
+    border: 1px solid black;
+    background-color: white;
+    padding: 0.7rem 2rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
 }

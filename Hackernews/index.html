@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
-    <link href="./dist/style.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link href="./dist/style.css" rel="stylesheet" />
     <title>HackerNews API</title>
-</head>
-<body>
-    <h1>HACKERNEWS API</h1>
-   
-    <!-- For saved/bookmarked stories -->
-    <div class="bookmark">
-        <h2>Bookmark</h2>
+  </head>
+  <body>
+    <!-- Nav Bar -->
+    <nav class="navbar">
+      <div class="logo">HackerNews API</div>
+      <div class="nav-links" id="navLinks">
+        <div>
+          <button id="google-login-btn">Continue with Google account</button>
+          <button id="google-sign-out-btn" class="hide">Sign Out</button>
+          <span class="material-icons bookmark-btn">bookmark</span>
+          <span id="profileUsername" class="hide"></span>
+          <img src="" alt="Profile Picture" id="profilePicture" class="hide" />
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="inner-container"></div>
     </div>
 
-    
-    <div class="container">
-        <h2>Stories</h2>
-        <div class="inner-container">
-        </div>
-    </div>
-    
     <!-- Navigation bar -->
     <div class="navigation">
-        <button class="previous-btn"><</button>
-        <button class="nav-btn active">1</button>
-        <button class="nav-btn">2</button>
-        <button class="nav-btn">3</button>
-        <button class="nav-btn">4</button>
-        <button class="nav-btn">5</button>
-        <button class="nav-btn">6</button>
-        <button class="nav-btn">7</button>
-        <button class="nav-btn">8</button>
-        <button class="nav-btn">9</button>
-        <button class="nav-btn">10</button>
-        <button class="next-btn">></button>
-      </div>
+      <button class="previous-btn"><</button>
+      <button class="nav-btn active">1</button>
+      <button class="nav-btn">2</button>
+      <button class="nav-btn">3</button>
+      <button class="nav-btn">4</button>
+      <button class="nav-btn">5</button>
+      <button class="nav-btn">6</button>
+      <button class="nav-btn">7</button>
+      <button class="nav-btn">8</button>
+      <button class="nav-btn">9</button>
+      <button class="nav-btn">10</button>
+      <button class="next-btn">></button>
+    </div>
 
     <script src="./dist/bundle.js"></script>
-</body>
+  </body>
 </html>
