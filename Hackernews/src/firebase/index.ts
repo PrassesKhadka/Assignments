@@ -6,7 +6,7 @@ import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAJIG2BZET3eRMM-OEk1TxD1w0-jMMd2O0",
   authDomain: "hackernews-api-51bf3.firebaseapp.com",
   projectId: "hackernews-api-51bf3",
@@ -14,6 +14,15 @@ export const firebaseConfig = {
   messagingSenderId: "577832126532",
   appId: "1:577832126532:web:f948b20968342fdfe41411",
 };
+
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication and get a reference to the service
+export const auth = getAuth(app);
+
+// Initialize services
+export const db = getFirestore(app);
 
 // export async function connectFirebase() {
 //   try {

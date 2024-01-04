@@ -1,30 +1,16 @@
-import { initializeApp } from "firebase/app";
 import {
-  getFirestore,
-  collection,
-  doc,
-  addDoc,
-  setDoc,
-} from "firebase/firestore";
-import {
-  getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { firebaseConfig } from ".";
+
+import { app, auth, db } from "../firebase/index";
 
 export async function run() {
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  // Initialize Firebase Authentication and get a reference to the service
-  const auth = getAuth(app);
-
-  // Initialize services
-  const db = getFirestore(app);
   // Initialize Firebase Authentication
   auth.languageCode = "en";
+
   // For Google Authentication:
   const provider = new GoogleAuthProvider();
 

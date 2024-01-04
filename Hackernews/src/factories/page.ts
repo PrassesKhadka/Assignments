@@ -90,6 +90,7 @@ export function Page(eachIndex: number = 10): IreturnPage {
     // clears the render caused by skeleton-loading
     innerContainer.innerHTML = "";
 
+    // renders stories/element inside innerContainer HTML Element
     story.forEach((element) => {
       renderStory(element, innerContainer);
     });

@@ -7,10 +7,10 @@
 
 :root {
   --body-background: white;
-  --card-background: white;
-  --h1-text: black;
-  --p-text: black;
-  --a-text: black;
+  --card-background: #ff69b4;
+  --h1-text: white;
+  --p-text: white;
+  --a-text: white;
 }
 :root.dark {
   --body-background: gray;
@@ -31,10 +31,10 @@ a {
   text-decoration: none;
 }
 span {
-  color: black;
+  color: white;
 }
 i {
-  color: black;
+  color: white;
 }
 .hide {
   display: none;
@@ -105,20 +105,12 @@ i {
   background-color: rgb(60, 60, 160);
   color: white;
 }
-/* For bookmark */
-
-.bookmark div {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 10px 0;
-}
 
 /* For box */
 .box {
   width: 100%;
   padding: 15px 8px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
   /* border-radius: 10px; */
   background-color: var(--card-background);
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
@@ -154,7 +146,7 @@ i {
     flex-wrap: wrap;
     align-items: center;
     gap: 2px;
-    color: black;
+    color: white;
     justify-content: center;
     cursor: pointer;
   }
@@ -162,26 +154,26 @@ i {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    color: black;
+    color: white;
     gap: 4px;
     justify-content: center;
     cursor: pointer;
   }
   & .time {
     display: flex;
-    color: black;
+    color: white;
     align-items: center;
     gap: 4px;
   }
   & .score {
     display: flex;
     align-items: center;
-    color: black;
+    color: white;
     gap: 2px;
   }
   & .save {
     & span {
-      color: black;
+      color: white;
       cursor: pointer;
     }
   }
@@ -193,7 +185,7 @@ i {
 }
 
 .inner-comment-box {
-  /* border-left:3px solid black; */
+  /* border-left:3px solid white; */
   width: 100%;
   height: 100%;
   padding: 10px;
@@ -244,12 +236,12 @@ i {
 
 .user-name {
   font-weight: bold;
-  color: black;
+  color: white;
   /* margin-bottom: 5px; */
 }
 
 .comment-time {
-  color: black;
+  color: white;
 }
 
 .comment-text {
@@ -306,6 +298,7 @@ i {
   & #profileUsername {
     font-size: 1.2rem;
     font-weight: 500;
+    color: black;
   }
 
   & #profilePicture {

@@ -7,8 +7,8 @@ const navigations = document.querySelectorAll(".nav-btn");
 const next_btn = document.querySelector(".next-btn");
 const prev_btn = document.querySelector(".previous-btn");
 
-// Keeping 5 stories on each page;
-const { nextPage, previousPage, goToIndex, render } = Page(5);
+// Keeping 12 stories on each page;
+const { nextPage, previousPage, goToIndex, render } = Page(12);
 
 // For event Listeners
 // when navigation buttons clicked

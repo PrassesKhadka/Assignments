@@ -1,10 +1,15 @@
 import { IreturnGetStory } from "../interface";
-import { renderBookmark } from "./Bookmark";
 import { renderDetailPage } from "./DetailPage";
 import { timeSince } from "../utils.ts/timeSince";
+import { auth } from "../firebase";
+import { db } from "../firebase";
+import { setDoc, doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore";
 
 // inside innerContainer it will be appended
-export function renderStory(element: IreturnGetStory, innerContainer: Element) {
+export async function renderStory(
+  element: IreturnGetStory,
+  innerContainer: Element
+) {
   // data needed
   const { by, time, url, title, kids, score } = element;
 
@@ -79,27 +84,39 @@ export function renderStory(element: IreturnGetStory, innerContainer: Element) {
   });
 
   // To bookmark stories
-  let active = false;
-  saveElement.addEventListener("click", () => {
-    // To change color of the bookmark icon
-    active = !active;
-    // selector
-    const bookmark_icon = document.querySelector(".save");
-    const icon = bookmark_icon.getElementsByTagName(
-      "span"
-    )[0] as HTMLSpanElement;
+  saveElement.addEventListener("click", async () => {
+    // Save in localStorage logic
+    // const bookmark: IreturnGetStory[] =
+    //   JSON.parse(localStorage.getItem("bookmark")) || [];
+    // const index = bookmark.findIndex((story) => story.id === element.id);
+    // index === -1 ? bookmark.push(element) : bookmark.splice(index, 1);
+    // // update localstorage
+    // localStorage.setItem("bookmark", JSON.stringify(bookmark));
 
-    active ? (icon.style.color = "pink") : (icon.style.color = "white");
+    // Save in cloud firestore
+    // get current authenticated user
+    const user = auth.currentUser;
+    if (user) {
+      const docRef = await doc(db, "users", `${user.uid}`);
+      await getDoc(docRef).then(async (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          const bookmarks: IreturnGetStory[] =
+            docSnapshot.data()?.bookmarks || [];
+          const index = bookmarks.findIndex((story) => story.id === element.id);
+          index === -1 ? bookmarks.push(element) : bookmarks.splice(index, 1);
 
-    const bookmark: IreturnGetStory[] =
-      JSON.parse(localStorage.getItem("bookmark")) || [];
-    const index = bookmark.findIndex((story) => story.id === element.id);
-    index === -1 ? bookmark.push(element) : bookmark.splice(index, 1);
+          // update firestore
+          await updateDoc(docRef, {
+            bookmarks,
+          });
+        } else {
+          console.log("Error finding document");
+        }
+      });
 
-    // update localstorage
-    localStorage.setItem("bookmark", JSON.stringify(bookmark));
-
-    // render it
-    renderBookmark();
+      // Now onSnapshot -> which will be triggered every second, to update the ui, when real time data updated
+    } else {
+      console.log("No user logged in");
+    }
   });
 }
