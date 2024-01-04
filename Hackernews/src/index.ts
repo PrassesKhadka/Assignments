@@ -1,5 +1,6 @@
 import { Page } from "./factories/page";
 import { run } from "./firebase/auth";
+import { renderBookmark } from "./components/Bookmark";
 
 // selectors:
 const inner_container = document.querySelector(".inner-container");
@@ -69,6 +70,18 @@ prev_btn.addEventListener("click", () => {
       btn.classList.add("active");
     }
   });
+});
+
+// Event listener for bookmark button
+const bookmarkBtn = document.querySelector(".bookmark-btn");
+bookmarkBtn.addEventListener("click", () => {
+  renderBookmark();
+});
+
+// when hackernws api clicked
+const logo = document.querySelector(".logo");
+logo.addEventListener("click", () => {
+  render();
 });
 
 // initial render 1st page

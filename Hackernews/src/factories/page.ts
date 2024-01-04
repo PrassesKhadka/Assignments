@@ -1,6 +1,6 @@
 import { getData } from "../api/data";
 import { IreturnGetStory } from "../interface";
-import { renderBookmark } from "../utils.ts/bookmark";
+import { renderBookmark } from "../components/Bookmark";
 import { renderSkeleton } from "../components/SkeletonLoading";
 import { renderStory } from "../components/Story";
 
@@ -79,8 +79,6 @@ export function Page(eachIndex: number = 10): IreturnPage {
     // selectors
     const innerContainer = document.querySelector(".inner-container");
 
-    // Render bookmark
-    renderBookmark();
     // Renders skeleton loading
     renderSkeleton();
 

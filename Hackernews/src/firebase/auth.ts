@@ -33,7 +33,7 @@ export async function run() {
   // const user = auth.currentUser;
 
   // when a user signs in ,out or changes account this gets triggered
-  onAuthStateChanged(auth, async (user) => {
+  await onAuthStateChanged(auth, async (user) => {
     if (user !== null) {
       // The user object has basic properties such as display name, email, etc.
       const { displayName, email, photoURL, emailVerified } = user;
@@ -71,11 +71,11 @@ export async function run() {
     signOutBtn.addEventListener("click", () => {
       signOut(auth)
         .then(() => {
-          alert("User signed out !!!");
+          console.assert("User signed out");
         })
         .catch((error) => {
           // An error happened.
-          alert("User unable to sign out !!!");
+          console.error("User unable to sign out !!!");
         });
     });
   });

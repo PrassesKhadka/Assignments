@@ -4,6 +4,7 @@ import { timeSince } from "../utils.ts/timeSince";
 import { auth } from "../firebase";
 import { db } from "../firebase";
 import { setDoc, doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore";
+import { renderError } from "./Error";
 
 // inside innerContainer it will be appended
 export async function renderStory(
@@ -113,9 +114,8 @@ export async function renderStory(
           console.log("Error finding document");
         }
       });
-
-      // Now onSnapshot -> which will be triggered every second, to update the ui, when real time data updated
     } else {
+      renderError("Login to save bookmarks!!!");
       console.log("No user logged in");
     }
   });

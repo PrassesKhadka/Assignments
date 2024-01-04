@@ -1,7 +1,9 @@
 // To render skeleton loading page:
 
 export function renderSkeleton() {
-  const innerContainer = document.querySelector(".inner-container");
+  const innerContainer = document.querySelector(
+    ".inner-container"
+  ) as HTMLDivElement;
   for (let i = 0; i < 5; i++) {
     const div = document.createElement("div");
     div.innerHTML = `
